@@ -1,0 +1,29 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th { text-align: left; color: var(--text-muted); font-size: 0.85rem; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
+  td { padding: 12px 0; border-bottom: 1px solid var(--border-color); color: var(--text-main); }
+  
+  tr:last-child td { border-bottom: none; }
+}
+
+.badge {
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  &.bg-success { background-color: #22c55e; }
+  &.bg-danger { background-color: #ef4444; }
+}
+
+.mat-column-registeredAt, 
+.mat-column-status,
+.mat-column-email {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.mat-column-status {
+  min-width: 100px; 
+}

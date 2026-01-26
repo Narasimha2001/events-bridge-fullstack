@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Event Cancelled</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f3f4f6; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header { background-color: #ef4444; color: white; padding: 20px; border-radius: 8px 8px 0 0; text-align: center; }
+        .content { padding: 20px; color: #333; line-height: 1.6; }
+        .event-name { font-weight: bold; color: #ef4444; }
+        .footer { text-align: center; font-size: 12px; color: #888; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Event Cancelled</h1>
+        </div>
+        <div class="content">
+            <p>Hello <strong th:text="${studentName}">Student</strong>,</p>
+            
+            <p>We regret to inform you that the following event has been <strong>cancelled</strong> by the organizer:</p>
+            
+            <h2 class="event-name" th:text="${eventTitle}">Event Title</h2>
+            
+            <p>Your registration has been voided. If this was a paid event, refunds will be processed shortly.</p>
+            
+            <p>We apologize for any inconvenience caused.</p>
+        </div>
+        <div class="footer">
+            <p>&copy; 2026 EventsBridge. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

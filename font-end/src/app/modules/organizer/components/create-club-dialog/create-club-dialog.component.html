@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Create New Club</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="clubForm" class="dialog-form">
+    
+    <p class="text-muted mb-4">Start a new community for your college events.</p>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Club Name</mat-label>
+      <input matInput formControlName="name" placeholder="Ex. Robotics Club">
+      <mat-icon matSuffix>groups</mat-icon>
+      <mat-error *ngIf="clubForm.get('name')?.hasError('minlength')">
+        Name must be at least 3 characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" rows="4" 
+                placeholder="What is this club about?"></textarea>
+      <mat-hint align="end">{{ clubForm.get('description')?.value?.length || 0 }}/500</mat-hint>
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="pb-3 pe-3">
+  <button mat-button (click)="onCancel()" [disabled]="isLoading">Cancel</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" 
+          [disabled]="clubForm.invalid || isLoading">
+    <mat-spinner diameter="20" *ngIf="isLoading" class="d-inline-block me-2"></mat-spinner>
+    {{ isLoading ? 'Creating...' : 'Create Club' }}
+  </button>
+</mat-dialog-actions>

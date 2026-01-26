@@ -1,0 +1,57 @@
+<div class="container fade-in">
+  
+  <div class="header mb-4">
+    <h1>My Tickets</h1>
+    <p class="text-muted">Manage your upcoming event registrations</p>
+  </div>
+
+  <div *ngIf="isLoading" class="d-flex justify-content-center p-5">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+
+  <div *ngIf="!isLoading && registrations.length === 0" class="empty-state">
+    <mat-icon>confirmation_number</mat-icon>
+    <h3>No Active Tickets</h3>
+    <p>You haven't registered for any events yet.</p>
+    <button mat-raised-button color="primary" routerLink="/public/events">Explore Events</button>
+  </div>
+
+  <div class="ticket-grid" *ngIf="!isLoading && registrations.length > 0">
+    
+    <div *ngFor="let reg of registrations" class="ticket-card">
+      
+      <div class="date-block">
+        <span class="month">{{ reg.eventStartTime | date:'MMM' }}</span>
+        <span class="day">{{ reg.eventStartTime | date:'dd' }}</span>
+      </div>
+
+      <div class="ticket-info">
+        <h3 class="event-title">{{ reg.eventTitle }}</h3>
+        
+        <div class="meta-row">
+          <span class="meta-item">
+            <mat-icon>schedule</mat-icon> {{ reg.eventStartTime | date:'shortTime' }}
+          </span>
+          <span class="meta-item">
+            <mat-icon>place</mat-icon> {{ reg.eventLocation }}
+          </span>
+        </div>
+
+        <div class="ticket-footer">
+          <span class="reg-id">ID: #{{ reg.id }}</span>
+          <span class="status-badge CONFIRMED">CONFIRMED</span>
+        </div>
+      </div>
+
+      <div class="ticket-actions">
+        <button mat-stroked-button color="warn" (click)="cancelTicket(reg.id)">
+          Cancel
+        </button>
+        <button mat-icon-button color="primary" [routerLink]="['/public/event', reg.eventId]" matTooltip="View Details">
+          <mat-icon>chevron_right</mat-icon>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

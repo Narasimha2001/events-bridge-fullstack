@@ -1,0 +1,73 @@
+<div class="dashboard-container fade-in">
+  
+  <div class="dashboard-header">
+    <div>
+      <button mat-button color="primary" routerLink="/organizer/dashboard">
+        <mat-icon>arrow_back</mat-icon> Back to Dashboard
+      </button>
+      <h1>Manage Club Events</h1>
+    </div>
+    <button mat-flat-button color="primary" class="create-btn" (click)="onCreateEvent()">
+      <mat-icon>add</mat-icon> New Event
+    </button>
+  </div>
+
+  <div class="events-grid">
+    
+    <mat-card *ngFor="let event of events" 
+              class="event-card" 
+              [class.cancelled-card]="event.status === 'CANCELLED'">
+      
+      <div class="status-badge" [ngClass]="event.status.toLowerCase()">
+        {{ event.status }}
+      </div>
+
+      <mat-card-header>
+        <mat-card-title>{{ event.title }}</mat-card-title>
+        <mat-card-subtitle>
+          <mat-icon class="tiny-icon">calendar_today</mat-icon> 
+          {{ event.startTime | date:'mediumDate' }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p class="location-text">
+          <mat-icon class="tiny-icon">location_on</mat-icon> 
+          {{ event.location }}
+        </p>
+        <p class="capacity-text">
+          <mat-icon class="tiny-icon">group</mat-icon> 
+          {{ event.capacity }} Attendees Max
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions align="end">
+        
+        <button mat-icon-button matTooltip="View Attendees" color="accent" 
+                (click)="openAttendeesDialog(event)">
+          <mat-icon>people</mat-icon>
+        </button>
+
+        <button mat-icon-button matTooltip="Edit Event" color="primary" 
+                [disabled]="event.status === 'CANCELLED'"
+                (click)="onEditEvent(event)">
+          <mat-icon>edit</mat-icon>
+        </button>
+
+        <button mat-icon-button matTooltip="Cancel Event" color="warn" 
+                [disabled]="event.status === 'CANCELLED'"
+                (click)="onDeleteEvent(event)">
+          <mat-icon>delete_forever</mat-icon>
+        </button>
+
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+
+  <div *ngIf="!isLoading && events.length === 0" class="empty-state">
+    <mat-icon>event_busy</mat-icon>
+    <h3>No events created yet</h3>
+    <button mat-stroked-button color="primary" (click)="onCreateEvent()">Create First Event</button>
+  </div>
+</div>

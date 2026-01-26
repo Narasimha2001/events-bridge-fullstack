@@ -1,0 +1,121 @@
+:host {
+  display: block;
+  background-color: #383838;
+  color: white;
+}
+
+h2[mat-dialog-title] {
+  margin: 0;
+  padding: 24px 24px 10px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #e0e0e0;
+}
+
+mat-dialog-content {
+  padding: 10px 24px 20px !important;
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #616161 transparent;
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+
+  .half-width {
+    flex: 1;
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+::ng-deep .mat-mdc-form-field {
+
+  input,
+  textarea {
+    color: #eeeeee !important;
+    background: transparent !important;
+    caret-color: #7986cb !important;
+
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+
+  .mdc-notched-outline__leading,
+  .mdc-notched-outline__trailing {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    border-width: 1px !important;
+  }
+
+
+  .mdc-notched-outline__notch {
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  &.mat-focused .mdc-notched-outline__leading,
+  &.mat-focused .mdc-notched-outline__trailing {
+    border-color: #7986cb !important;
+    border-width: 2px !important;
+  }
+
+  &.mat-focused .mdc-notched-outline__notch {
+    border-color: #7986cb !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  .mdc-floating-label {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  &.mat-focused .mdc-floating-label,
+  .mdc-floating-label--float-above {
+    color: #7986cb !important;
+    font-weight: 500;
+  }
+
+  .mat-icon,
+  .mat-datepicker-toggle {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+
+  &.mat-focused .mat-icon,
+  &.mat-focused .mat-datepicker-toggle {
+    color: #7986cb !important;
+  }
+}
+
+mat-dialog-actions {
+  padding: 12px 24px 24px !important;
+  background: transparent;
+  gap: 12px;
+
+  button[mat-button] {
+    color: #bdbdbd;
+  }
+
+  button[mat-flat-button] {
+    background-color: #5c6bc0;
+    color: white;
+  }
+}

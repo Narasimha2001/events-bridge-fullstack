@@ -1,0 +1,82 @@
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; 
+  text-align: center;
+  padding: 20px;
+}
+
+.content {
+  max-width: 500px;
+}
+
+.huge-icon {
+  font-size: 120px;
+  height: 120px;
+  width: 120px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+  animation: float 3s ease-in-out infinite;
+}
+
+.error-code {
+  font-size: 6rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1;
+  color: var(--text-main); 
+  opacity: 0.1; 
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -150%) scale(1.5);
+  z-index: -1;
+}
+
+.error-message {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 16px 0;
+  color: var(--text-main);
+}
+
+.description {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  button {
+    padding: 8px 24px;
+    font-size: 1rem;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .huge-icon { font-size: 80px; height: 80px; width: 80px; }
+  .error-code { font-size: 4rem; }
+  .error-message { font-size: 1.8rem; }
+  .actions { flex-direction: column; }
+}

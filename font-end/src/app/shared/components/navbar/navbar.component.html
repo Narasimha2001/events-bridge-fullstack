@@ -1,0 +1,58 @@
+<mat-toolbar color="primary">
+  <span>EventsBridge</span>
+
+  <span class="spacer"></span>
+
+  <button mat-button routerLink="/public/events">Events</button>
+
+  <button mat-icon-button (click)="toggleTheme()" matTooltip="Toggle Dark Mode">
+    <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+
+  <ng-container *ngIf="!authService.isLoggedIn()">
+    <button mat-button routerLink="/auth/login">Login</button>
+    <button mat-raised-button color="accent" routerLink="/auth/register">Sign Up</button>
+  </ng-container>
+
+  <ng-container *ngIf="authService.isLoggedIn()">
+
+    <button mat-button routerLink="/organizer/dashboard" *ngIf="currentUser?.role === 'ORGANIZER'">
+      Dashboard
+    </button>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="authService.isLoggedIn()">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  
+  <mat-menu #menu="matMenu">
+    
+    <button mat-menu-item routerLink="/profile">
+        <mat-icon>badge</mat-icon>
+        <span>My Profile</span>
+      </button>
+    
+    <mat-divider></mat-divider>
+
+    <button mat-menu-item routerLink="/public/my-registrations" 
+            *ngIf="currentUser?.role === 'STUDENT'">
+      <mat-icon>confirmation_number</mat-icon>
+      <span>My Tickets</span>
+    </button>
+
+    <button mat-menu-item routerLink="/organizer/dashboard" 
+            *ngIf="currentUser?.role === 'ORGANIZER'">
+      <mat-icon>dashboard</mat-icon>
+      <span>Organizer Dashboard</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+
+  </mat-menu>
+
+  </ng-container>
+</mat-toolbar>

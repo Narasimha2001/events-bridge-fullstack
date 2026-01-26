@@ -1,0 +1,35 @@
+<div class="hero-section fade-in">
+  
+  <div class="hero-content">
+    <h1>EventsBridge</h1>
+    <p class="subtitle">Connect. Organize. Experience.</p>
+    <p class="description">
+      The ultimate platform for college clubs and student events. 
+      Discover what's happening on campus or manage your own club with ease.
+    </p>
+
+    <div class="cta-buttons">
+      <button mat-flat-button color="primary" routerLink="/public/events">
+        <mat-icon>explore</mat-icon> Browse Events
+      </button>
+
+      <button *ngIf="!authService.isLoggedIn()" 
+              mat-stroked-button 
+              class="white-btn" 
+              routerLink="/auth/login">
+        <mat-icon>login</mat-icon> Organizer Login
+      </button>
+
+      <button *ngIf="authService.isLoggedIn()" 
+              mat-stroked-button 
+              class="white-btn" 
+              [routerLink]="getDashboardRoute()">
+        <mat-icon>dashboard</mat-icon> Go to Dashboard
+      </button>
+    </div> 
+  </div>
+
+  <div class="bg-shape circle-1"></div>
+  <div class="bg-shape circle-2"></div>
+
+</div>

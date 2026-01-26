@@ -1,0 +1,88 @@
+@use '@angular/material' as mat;
+
+@mixin event-search-bar-theme($theme) {
+  $color-config: mat.get-color-config($theme);
+  
+  $background-palette: map-get($color-config, 'background');
+  $foreground-palette: map-get($color-config, 'foreground');
+  
+  $card-bg: map-get($background-palette, 'card');
+  $text-color: map-get($foreground-palette, 'text');
+  $divider-color: map-get($foreground-palette, 'divider');
+  
+  $is-dark: map-get($color-config, 'is-dark');
+
+  .search-card {
+    background-color: $card-bg;
+    color: $text-color;
+    border: 1px solid ($divider-color or rgba(0,0,0,0.12));
+    
+    @if $is-dark {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    } @else {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+
+
+.search-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  margin-bottom: 32px;
+}
+
+.search-card {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 1000px;
+  flex-wrap: wrap;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.search-field {
+  flex: 2;
+  min-width: 280px;
+}
+
+.date-field {
+  flex: 1;
+  min-width: 240px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  height: 56px;
+  align-items: center;
+
+  button {
+    height: 100%;
+    padding: 0 24px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+}
+
+::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .search-card {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+  }
+
+  .actions {
+    height: 48px;
+    margin-top: 8px;
+    button { flex: 1; }
+  }
+}

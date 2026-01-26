@@ -1,0 +1,95 @@
+<div class="details-container fade-in" *ngIf="event">
+  
+  <div class="hero-banner" [style.background-image]="event.bannerImageUrl ? 'url(' + event.bannerImageUrl + ')' : ''">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <span class="status-badge" [class]="event.status">{{ event.status }}</span>
+      <h1 class="event-title">{{ event.title }}</h1>
+      
+      <div class="meta-row">
+        <span class="meta-item">
+          <mat-icon>calendar_today</mat-icon> {{ event.startTime | date:'fullDate' }}
+        </span>
+        <span class="meta-item">
+          <mat-icon>schedule</mat-icon> {{ event.startTime | date:'shortTime' }} - {{ event.endTime | date:'shortTime' }}
+        </span>
+        <span class="meta-item">
+          <mat-icon>place</mat-icon> {{ event.location }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <div class="details-grid">
+      
+      <div class="main-column">
+        
+        <mat-card class="info-card">
+          <mat-card-header>
+            <mat-card-title>About Event</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p class="description-text">{{ event.description }}</p>
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="organizer-card">
+          <div class="organizer-row">
+            <div class="club-avatar">
+              <mat-icon>groups</mat-icon>
+            </div>
+            <div class="organizer-info">
+              <h3>Organized by {{ event.club?.name }}</h3>
+              <p>Contact Club for queries</p>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+
+      <div class="side-column">
+        <mat-card class="action-card sticky-card">
+          <mat-card-content>
+            <div class="price-section">
+              <span class="price-tag">Free</span>
+            </div>
+            
+            <div class="capacity-section">
+              <div class="progress-info">
+                <span *ngIf="event.capacity - event.registrationCount > 10; else lowSpots">
+                   Spots Filling Fast!
+                </span>
+                <ng-template #lowSpots>
+                   <span class="text-danger fw-bold">Only {{ event.capacity - event.registrationCount }} spots left!</span>
+                </ng-template>
+
+                <span>{{ event.registrationCount }} / {{ event.capacity }} Filled</span>
+              </div>
+              
+              <mat-progress-bar 
+                  mode="determinate" 
+                  [value]="fillPercentage"
+                  [color]="fillPercentage > 90 ? 'warn' : 'primary'">
+              </mat-progress-bar>
+            </div>
+
+            <button mat-raised-button color="primary" class="register-btn" 
+                    (click)="onRegister()" [disabled]="isRegistering || event.status !== 'PUBLISHED'">
+              <span *ngIf="!isRegistering">Register Now</span>
+              <span *ngIf="isRegistering">Processing...</span>
+            </button>
+            
+            <p class="login-hint" *ngIf="!authService.isLoggedIn()">
+              *You need to login to register
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>

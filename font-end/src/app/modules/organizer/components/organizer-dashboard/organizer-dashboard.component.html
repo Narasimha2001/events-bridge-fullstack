@@ -1,0 +1,85 @@
+<div class="dashboard-container fade-in">
+  <h1>Organizer Dashboard</h1>
+
+  <div class="stats-grid mb-4">
+
+    <mat-card class="stat-card blue">
+      <div class="stat-icon">
+        <mat-icon>domain</mat-icon>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ stats.totalClubs }}</div>
+        <div class="stat-label">Active Clubs</div>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card purple">
+      <div class="stat-icon">
+        <mat-icon>event</mat-icon>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ stats.totalEvents }}</div>
+        <div class="stat-label">Events Created</div>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card green">
+      <div class="stat-icon">
+        <mat-icon>update</mat-icon>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ stats.upcomingEvents }}</div>
+        <div class="stat-label">Upcoming</div>
+      </div>
+    </mat-card>
+
+    <mat-card class="stat-card orange">
+      <div class="stat-icon">
+        <mat-icon>groups</mat-icon>
+      </div>
+      <div class="stat-content">
+        <div class="stat-value">{{ stats.totalRegistrations }}</div>
+        <div class="stat-label">Total Registrations</div>
+      </div>
+    </mat-card>
+
+  </div>
+
+<div class="dashboard-header">
+  <h1>My Clubs</h1>
+  
+  <button mat-flat-button color="primary" style="margin-bottom: 24px;" (click)="openCreateClubDialog()">
+    <mat-icon>add</mat-icon>
+    Create New Club
+  </button>
+</div>
+
+
+
+<div class="club-grid" *ngIf="!isLoading && myClubs.length > 0">
+
+  <mat-card *ngFor="let club of myClubs" class="club-card hover-lift">
+
+    <div class="card-img-placeholder">
+      <mat-icon>groups</mat-icon>
+    </div>
+
+    <mat-card-header>
+      <mat-card-title>{{ club.name }}</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p class="description">{{ club.description | slice:0:100 }}...</p>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-button color="accent">ANALYTICS</button>
+
+      <button mat-raised-button color="primary" [routerLink]="['/organizer/club', club.id]">
+        MANAGE
+      </button>
+
+    </mat-card-actions>
+  </mat-card>
+</div>
+</div>

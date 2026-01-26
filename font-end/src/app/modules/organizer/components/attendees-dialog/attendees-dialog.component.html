@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>
+  Attendees: {{ data.eventTitle }}
+</h2>
+
+<mat-dialog-content>
+  
+  <div *ngIf="isLoading" class="d-flex justify-content-center p-4">
+    <mat-spinner diameter="30"></mat-spinner>
+  </div>
+
+  <div *ngIf="!isLoading && attendees.length === 0" class="text-center p-4 text-muted">
+    <mat-icon>person_off</mat-icon>
+    <p>No registrations yet.</p>
+  </div>
+
+  <table class="table" *ngIf="!isLoading && attendees.length > 0">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of attendees">
+        <td class="fw-bold">{{ user.studentName }}</td>
+        <td class="text-muted">{{ user.studentEmail }}</td>
+        <td>
+          <span class="badge" 
+                [class.bg-success]="user.status === 'CONFIRMED'"
+                [class.bg-danger]="user.status === 'CANCELLED'">
+            {{ user.status }}
+          </span>
+        </td>
+        <td>{{ user.registeredAt | date:'shortDate' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  
+  <button mat-flat-button color="primary" 
+          (click)="downloadCsv()" 
+          [disabled]="attendees.length === 0">
+    <mat-icon>download</mat-icon> Export CSV
+  </button>
+</mat-dialog-actions>

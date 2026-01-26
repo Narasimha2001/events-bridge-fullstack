@@ -1,0 +1,28 @@
+:host {
+  position: sticky; 
+  top: 0;
+  z-index: 1000; 
+  display: block;
+  width: 100%;
+}
+
+mat-toolbar {
+  background: #3f51b5;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  position: relative;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+button {
+  margin-left: 8px;
+}
+
+
+:host-context(.dark-theme) mat-toolbar {
+  background: #1e293b; 
+  color: #f1f5f9;
+}

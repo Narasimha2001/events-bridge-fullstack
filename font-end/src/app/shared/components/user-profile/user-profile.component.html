@@ -1,0 +1,48 @@
+<div class="profile-container fade-in">
+  
+  <mat-card class="profile-card" *ngIf="!isLoading && user">
+    
+    <div class="profile-header">
+      <div class="avatar-circle">
+        {{ user.fullName.charAt(0).toUpperCase() }}
+      </div>
+      <h2>{{ user.fullName }}</h2>
+      <span class="role-badge" [ngClass]="getRoleBadgeColor(user.role)">
+        {{ user.role }}
+      </span>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="details-content">
+      
+      <div class="detail-row">
+        <mat-icon>email</mat-icon>
+        <div>
+          <label>Email Address</label>
+          <p>{{ user.email }}</p>
+        </div>
+      </div>
+
+      <div class="detail-row">
+        <mat-icon>insights</mat-icon>
+        <div>
+          <label>{{ user.role === 'ORGANIZER' ? 'Events Hosted' : 'Events Registered' }}</label>
+          <p class="stat-highlight">{{ user.totalActivityCount }}</p>
+        </div>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-stroked-button color="warn" (click)="authService.doLogoutCleanup()">
+        <mat-icon>logout</mat-icon> Logout
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+
+  <div *ngIf="isLoading" class="loading-state">
+    <mat-spinner diameter="40"></mat-spinner>
+  </div>
+</div>

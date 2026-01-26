@@ -1,0 +1,44 @@
+.event-form {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+  min-width: 400px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.half-width {
+  flex: 1;
+}
+
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+
+input[type="datetime-local"] {
+  color: #ffffff; 
+  
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(1); 
+    cursor: pointer;
+    opacity: 0.6;
+    transition: 0.2s;
+    
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
